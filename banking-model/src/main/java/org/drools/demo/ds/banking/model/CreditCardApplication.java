@@ -16,14 +16,18 @@
 
 package org.drools.demo.ds.banking.model;
 
+import org.kie.api.definition.type.PropertyReactive;
+
 /**
  * Models a Credit Cart Application
  */
+@PropertyReactive
 public class CreditCardApplication {
     private String customerId;
     private Integer creditLimit;
     private String cardType;
     private Integer anualFee;
+    private boolean approved;
 
     public CreditCardApplication() {
     }
@@ -67,6 +71,14 @@ public class CreditCardApplication {
         this.anualFee = anualFee;
     }
 
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
     @Override
     public boolean equals(Object o) {
         if ( this == o ) return true;
@@ -74,6 +86,7 @@ public class CreditCardApplication {
 
         CreditCardApplication that = (CreditCardApplication) o;
 
+        if ( approved != that.approved ) return false;
         if ( customerId != null ? !customerId.equals( that.customerId ) : that.customerId != null ) return false;
         if ( creditLimit != null ? !creditLimit.equals( that.creditLimit ) : that.creditLimit != null ) return false;
         if ( cardType != null ? !cardType.equals( that.cardType ) : that.cardType != null ) return false;
@@ -87,6 +100,7 @@ public class CreditCardApplication {
         result = 31 * result + (creditLimit != null ? creditLimit.hashCode() : 0);
         result = 31 * result + (cardType != null ? cardType.hashCode() : 0);
         result = 31 * result + (anualFee != null ? anualFee.hashCode() : 0);
+        result = 31 * result + (approved ? 1 : 0);
         return result;
     }
 
@@ -97,6 +111,7 @@ public class CreditCardApplication {
                ", creditLimit=" + creditLimit +
                ", cardType='" + cardType + '\'' +
                ", anualFee=" + anualFee +
+               ", approved=" + approved +
                '}';
     }
 }

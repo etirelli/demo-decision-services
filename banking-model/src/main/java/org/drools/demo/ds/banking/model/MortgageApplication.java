@@ -16,14 +16,18 @@
 
 package org.drools.demo.ds.banking.model;
 
+import org.kie.api.definition.type.PropertyReactive;
+
 /**
  * Models a mortgage application
  */
+@PropertyReactive
 public class MortgageApplication {
     private String customerId;
     private Integer amount;
     private Integer amortization;
     private Double interestRate;
+    private boolean approved;
 
     public MortgageApplication() {
     }
@@ -67,6 +71,14 @@ public class MortgageApplication {
         this.interestRate = interestRate;
     }
 
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
     @Override
     public boolean equals(Object o) {
         if ( this == o ) return true;
@@ -74,6 +86,7 @@ public class MortgageApplication {
 
         MortgageApplication that = (MortgageApplication) o;
 
+        if ( approved != that.approved ) return false;
         if ( customerId != null ? !customerId.equals( that.customerId ) : that.customerId != null ) return false;
         if ( amount != null ? !amount.equals( that.amount ) : that.amount != null ) return false;
         if ( amortization != null ? !amortization.equals( that.amortization ) : that.amortization != null ) return false;
@@ -87,6 +100,7 @@ public class MortgageApplication {
         result = 31 * result + (amount != null ? amount.hashCode() : 0);
         result = 31 * result + (amortization != null ? amortization.hashCode() : 0);
         result = 31 * result + (interestRate != null ? interestRate.hashCode() : 0);
+        result = 31 * result + (approved ? 1 : 0);
         return result;
     }
 
@@ -97,6 +111,7 @@ public class MortgageApplication {
                ", amount=" + amount +
                ", amortization=" + amortization +
                ", interestRate=" + interestRate +
+               ", approved=" + approved +
                '}';
     }
 }

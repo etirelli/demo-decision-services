@@ -16,9 +16,12 @@
 
 package org.drools.demo.ds.banking.model;
 
+import org.kie.api.definition.type.PropertyReactive;
+
 /**
  * A customer entity
  */
+@PropertyReactive
 public class Customer {
     private String id;
     private String name;
